@@ -249,6 +249,9 @@ The Policy Wonk is copyright 2021-2023 Amino, Inc. and distributed under the ter
 
 History
 =======
+**0.8.0**
+  2025-05-12: No code changes, just dependency updates and other cleanups. Now requires Python 3.9+, the oldest supported version. Migrated from poetry=>uv, black/flake/pylint=>ruff. Fixed minor typing deprecations.
+
 **0.7.1**
   2023-03-23: Wonk will now create the 'combined' policy set output directory if it doesn't already exist. Relax PyYAML constraint to >=5.0, upgrade and re-lock all loosely pinned dependencies. Require poetry >= 1.3.
 
