@@ -1,7 +1,7 @@
 """Manage Wonk's configuration."""
 
 import pathlib
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
 import yaml
 from pydantic import BaseModel
@@ -14,9 +14,9 @@ class PolicySet(BaseModel):
     """Describes a policy set."""
 
     name: str
-    managed: List[str] = []
-    local: List[str] = []
-    inherits: List[str] = []
+    managed: list[str] = []
+    local: list[str] = []
+    inherits: list[str] = []
     abstract: bool = False
 
     def __ior__(self, other):
@@ -40,7 +40,7 @@ class PolicySet(BaseModel):
 class Config(BaseModel):
     """Describes a Wonk configuration file."""
 
-    policy_sets: Dict[str, PolicySet]
+    policy_sets: dict[str, PolicySet]
 
 
 def load_config(config_path: Optional[pathlib.Path] = None) -> Config:
@@ -53,7 +53,7 @@ def load_config(config_path: Optional[pathlib.Path] = None) -> Config:
     return parse_config(data)
 
 
-def parse_config(block_all_config: Dict[str, Any]) -> Config:
+def parse_config(block_all_config: dict[str, Any]) -> Config:
     """Parse the dictionary containing all Wonk configuration into a Config object."""
 
     try:
@@ -66,7 +66,7 @@ def parse_config(block_all_config: Dict[str, Any]) -> Config:
     return Config(policy_sets=policy_sets)  # type: ignore
 
 
-def parse_policy_sets(block_policy_sets: Dict[str, Any]) -> Dict[str, PolicySet]:
+def parse_policy_sets(block_policy_sets: dict[str, Any]) -> dict[str, PolicySet]:
     """Parse the dictionary containing policy set definitions into a dict of PolicySets."""
 
     policy_sets = {}

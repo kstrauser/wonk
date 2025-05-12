@@ -6,7 +6,6 @@ import argparse
 import json
 import pathlib
 import sys
-from typing import List
 
 from wonk.aws import arn_for, iam_client, name_for
 from wonk.config import load_config
@@ -66,7 +65,7 @@ def command_line_build(args):
         print()
 
 
-def policies_from_filenames(filenames: List[str]) -> List[Policy]:
+def policies_from_filenames(filenames: list[str]) -> list[Policy]:
     """Return a list of Policy objects from the contents of the named files."""
 
     policies = []
