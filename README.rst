@@ -133,9 +133,9 @@ Use ``wonk fetch`` to retrieve a policy from AWS by name or by ARN and write it 
 
 ::
 
-    $ wonk fetch --arn "arn:aws:iam::aws:policy/AWSLambdaFullAccess"
+    $ wonk fetch --arn "arn:aws:iam::aws:policy/AWSLambda_FullAccess"
     $ wonk fetch --name AWSLambdaFullAccess
-    $ wonk fetch --profile my_aws_profile_name --name AWSLambdaFullAccess
+    $ wonk fetch --profile my_aws_profile_name --name AWSLambda_FullAccess
 
 Combining policies
 ------------------
