@@ -121,7 +121,7 @@ Installation
 
 ``pip install wonk``
 
-Alternatively: clone this repo and run ``poetry install``.
+Alternatively: clone this repo and run ``uv sync``.
 
 Usage
 =====
