@@ -1,6 +1,5 @@
 """Use a solver to pack as many statements as possible into as few policies as possible."""
 
-
 from ortools.linear_solver import pywraplp  # type: ignore
 
 from wonk.exceptions import UnpackableStatementsError

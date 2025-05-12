@@ -31,14 +31,12 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-  "black>=25.1.0",
   "docutils>=0.21.2",
-  "flake8>=7.2.0",
   "mypy>=1.15.0",
-  "pylint>=3.3.7",
   "pytest>=8.3.5",
   "pytest-mock>=3.14.0",
   "rstcheck>=6.2.4",
+  "ruff>=0.11.9",
 ]
 
 [build-system]
@@ -47,13 +45,6 @@ build-backend = "uv_build"
 
 [project.scripts]
 wonk = "wonk.cli:handle_command_line"
-
-[tool.black]
-line-length = 99
-
-[tool.isort]
-profile = "black"
-line_length = 99
 
 [tool.mypy]
 check_untyped_defs = true
