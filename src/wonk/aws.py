@@ -7,7 +7,7 @@ from typing import Optional
 import boto3
 
 
-@lru_cache()
+@lru_cache
 def iam_client(*, profile: Optional[str] = None):
     """Return a boto3 IAM client."""
 

@@ -193,7 +193,7 @@ class Statement:
         for base in range(0, len(actions), chunk_size):
             sub_statement = copy.deepcopy(self.rest)
             sub_statement[self.resource_key] = self.resource_value
-            sub_statement[statement_action] = actions[base : base + chunk_size]  # noqa: E203
+            sub_statement[statement_action] = actions[base : base + chunk_size]
             yield sub_statement
 
 

@@ -59,3 +59,6 @@ line_length = 99
 check_untyped_defs = true
 ignore_missing_imports = true
 files = "**/*.py"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
