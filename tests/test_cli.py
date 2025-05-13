@@ -13,7 +13,7 @@ from wonk.models import Policy
 
 @pytest.fixture
 def wonk_tempdir():
-    """A temporary directory setup to run wonk commands."""
+    """Create a temporary directory setup to run wonk commands."""
 
     with TemporaryDirectory() as tmpdir:
         dir_path = Path(tmpdir)
@@ -27,7 +27,7 @@ def wonk_tempdir():
 
 @pytest.fixture
 def wonk_yaml_abstract(wonk_tempdir):
-    """A wonk.yaml file with an abstract policy set."""
+    """Create a wonk.yaml file with an abstract policy set."""
 
     config = {
         "policy_sets": {

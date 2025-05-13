@@ -3,7 +3,6 @@
 import json
 import pathlib
 import re
-from typing import Dict, List, Tuple
 
 from xdg import xdg_cache_home
 
@@ -14,10 +13,10 @@ from wonk.models import Policy, Statement, canonicalize_resources, smallest_json
 POLICY_CACHE_DIR = xdg_cache_home() / "com.amino.wonk" / "policies"
 
 
-def minify(policies: List[Policy]) -> List[Statement]:
+def minify(policies: list[Policy]) -> list[Statement]:
     """Reduce the input policies to the minimal set of functionally identical equivalents."""
 
-    internal_statements: List[Statement] = []
+    internal_statements: list[Statement] = []
     for policy in policies:
         internal_statements.extend(policy.statements)
 
@@ -33,13 +32,13 @@ def minify(policies: List[Policy]) -> List[Statement]:
     return internal_statements
 
 
-def grouped_actions(statements: List[Statement]) -> Tuple[bool, List[Statement]]:
+def grouped_actions(statements: list[Statement]) -> tuple[bool, list[Statement]]:
     """Merge similar policies' actions.
 
     Returns a list of statements whose actions have been combined when possible.
     """
 
-    statement_sets: Dict[str, Statement] = {}
+    statement_sets: dict[str, Statement] = {}
     changed = False
 
     for statement in statements:
@@ -59,13 +58,13 @@ def grouped_actions(statements: List[Statement]) -> Tuple[bool, List[Statement]]
     return changed, list(statement_sets.values())
 
 
-def grouped_resources(statements: List[Statement]) -> Tuple[bool, List[Statement]]:
+def grouped_resources(statements: list[Statement]) -> tuple[bool, list[Statement]]:
     """Merge similar policies' resources.
 
     Returns a list of statements whose resources have been combined when possible.
     """
 
-    statement_sets: Dict[str, Statement] = {}
+    statement_sets: dict[str, Statement] = {}
     changed = False
 
     for statement in statements:
@@ -87,7 +86,7 @@ def grouped_resources(statements: List[Statement]) -> Tuple[bool, List[Statement
     return changed, list(statement_sets.values())
 
 
-def combine(policies: List[Policy]) -> List[Policy]:
+def combine(policies: list[Policy]) -> list[Policy]:
     """Combine policy files into the smallest possible set of outputs."""
 
     new_policy = Policy(statements=minify(policies))
@@ -149,7 +148,7 @@ def policy_set_pattern(policy_set: str) -> re.Pattern:
     return re.compile(rf"^{final}_\d+$")
 
 
-def write_policy_set(output_dir: pathlib.Path, base_name: str, policies: List[Policy]):
+def write_policy_set(output_dir: pathlib.Path, base_name: str, policies: list[Policy]):
     """Write the packed sets, return the names of the files written, and collect garbage."""
 
     # Get the list of existing files for this policy set so that we can delete them later. First,

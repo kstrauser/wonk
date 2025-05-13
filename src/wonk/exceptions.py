@@ -9,6 +9,7 @@ class TooManyPoliciesError(WonkException):
     """Expected to find at most 10 policies in a policy set."""
 
     def __init__(self, policy_set, policies):
+        """Create a TooManyPoliciesError exception."""
         super().__init__()
         self.policy_set = policy_set
         self.policies = policies

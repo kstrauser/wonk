@@ -1,13 +1,11 @@
 """Use a solver to pack as many statements as possible into as few policies as possible."""
 
-from typing import List
-
 from ortools.linear_solver import pywraplp  # type: ignore
 
 from wonk.exceptions import UnpackableStatementsError
 
 
-def pack_statements(packed: List[str], max_statement_size: int, bins: int) -> List[List[str]]:
+def pack_statements(packed: list[str], max_statement_size: int, bins: int) -> list[list[str]]:
     """Use Google's solver to pack the statements into a minimal number of bins.
 
     This code is borrowed from the example code at

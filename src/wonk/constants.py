@@ -1,7 +1,7 @@
 """Common Wonk constants."""
 
 from enum import Enum
-from typing import Any, Dict, Tuple
+from typing import Any
 
 
 class PolicyKey(str, Enum):
@@ -29,7 +29,7 @@ class StatementKey(str, Enum):
 # This are the arguments to `json.dumps` we'll use to try to pack as as much information into a
 # policy as we can. These are ordered from most desirable (and with the largest output) to least
 # (and most compact).
-JSON_ARGS: Tuple[Dict[str, Any], ...] = (
+JSON_ARGS: tuple[dict[str, Any], ...] = (
     {"indent": 4},
     {"indent": 2},
     {"indent": "\t"},

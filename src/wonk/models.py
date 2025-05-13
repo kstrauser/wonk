@@ -4,9 +4,10 @@ import copy
 import json
 import math
 import re
+from collections.abc import Generator
 from dataclasses import dataclass, field
 from hashlib import sha256
-from typing import Any, Dict, Generator, List, Set, Tuple, Union
+from typing import Any, Union
 
 from .constants import (
     ACTION_KEYS,
@@ -18,7 +19,7 @@ from .constants import (
 )
 from .exceptions import UnshrinkablePolicyError
 
-StatementData = Dict[str, Any]
+StatementData = dict[str, Any]
 
 
 @dataclass(frozen=True)
@@ -96,7 +97,7 @@ class Statement:
 
         """
 
-        elems: List[Union[str, Tuple[str, Any]]] = []
+        elems: list[Union[str, tuple[str, Any]]] = []
 
         # First, record whether this statement has Action or NotAction keys.
         elems.append(self.action_key)
@@ -118,7 +119,7 @@ class Statement:
         common, then their resources can be combined into a single statement.
         """
 
-        elems: List[Union[str, Tuple[str, Any]]] = []
+        elems: list[Union[str, tuple[str, Any]]] = []
 
         # First, record whether this statement has Action or NotAction keys (and those values).
         elems.append((self.action_key, sorted(self.action_value)))
@@ -134,7 +135,7 @@ class Statement:
 
     def sorting_key(
         self,
-    ) -> Tuple[bool, bool, bool, bool, int, str, int, List[str]]:
+    ) -> tuple[bool, bool, bool, bool, int, str, int, list[str]]:
         """Return a key that sorts statements in the expected way.
 
         - Actions before NotActions
@@ -192,7 +193,7 @@ class Statement:
         for base in range(0, len(actions), chunk_size):
             sub_statement = copy.deepcopy(self.rest)
             sub_statement[self.resource_key] = self.resource_value
-            sub_statement[statement_action] = actions[base : base + chunk_size]  # noqa: E203
+            sub_statement[statement_action] = actions[base : base + chunk_size]
             yield sub_statement
 
 
@@ -202,7 +203,7 @@ class Policy:
 
     DEFAULT_ID = "*" * 32
 
-    statements: List[Statement]
+    statements: list[Statement]
     version: str = field(default="2012-10-17")
 
     def __post_init__(self):
@@ -228,7 +229,7 @@ class Policy:
 
         return self.as_json() == other.as_json()
 
-    def as_json(self) -> Dict[str, Any]:
+    def as_json(self) -> dict[str, Any]:
         """Represent the Policy as a JSON object."""
 
         return {
@@ -291,11 +292,11 @@ def smallest_json(data: dict) -> str:
     return json.dumps(data, sort_keys=True, **JSON_ARGS[-1])
 
 
-def deduped_items(items: Set[str]) -> List[str]:
+def deduped_items(items: set[str]) -> list[str]:
     """Return a sorted list of all the unique items in `items`, ignoring case."""
 
     # First, group all items by their casefolded values. This lumps "foo" and "FOO" together.
-    unique: Dict[str, List[str]] = {}
+    unique: dict[str, list[str]] = {}
     for item in items:
         unique.setdefault(item.casefold(), []).append(item)
 
@@ -305,7 +306,7 @@ def deduped_items(items: Set[str]) -> List[str]:
     return [sorted(values)[0] for _, values in sorted(unique.items())]
 
 
-def collect_wildcard_matches(items: Set[str]) -> Union[str, List[str]]:
+def collect_wildcard_matches(items: set[str]) -> Union[str, list[str]]:
     """Return the reduced set of items as either a single string or a sorted list of strings.
 
     This removes wildcard matches from the set. If the set contains both "foo*" and "foobar",
@@ -316,7 +317,7 @@ def collect_wildcard_matches(items: Set[str]) -> Union[str, List[str]]:
         return items.pop()
 
     # Build a dict of wildcard items to their regular expressions.
-    patterns: Dict[str, re.Pattern] = {}
+    patterns: dict[str, re.Pattern] = {}
     for item in items:
         if "*" not in item:
             continue
@@ -337,7 +338,7 @@ def collect_wildcard_matches(items: Set[str]) -> Union[str, List[str]]:
     return new_items
 
 
-def canonicalize_resources(resources: Set[str]) -> Union[str, List[str]]:
+def canonicalize_resources(resources: set[str]) -> Union[str, list[str]]:
     """Return the set of resources as either a single string or a sorted list of strings."""
 
     if "*" in resources:
@@ -346,7 +347,7 @@ def canonicalize_resources(resources: Set[str]) -> Union[str, List[str]]:
     return collect_wildcard_matches(resources)
 
 
-def to_set(value: Union[str, List[str]]) -> Set[str]:
+def to_set(value: Union[str, list[str]]) -> set[str]:
     """Convert a string or list of strings to a set with that key or keys."""
 
     if isinstance(value, str):
@@ -354,7 +355,7 @@ def to_set(value: Union[str, List[str]]) -> Set[str]:
     return set(value)
 
 
-def value_to_set(statement: StatementData, key: str) -> Set[str]:
+def value_to_set(statement: StatementData, key: str) -> set[str]:
     """Return the contents of the statements key as a (possibly empty) set of strings."""
 
     try:
@@ -364,7 +365,7 @@ def value_to_set(statement: StatementData, key: str) -> Set[str]:
     return to_set(value)
 
 
-def which_type(statement: StatementData, choices: Tuple[StatementKey, StatementKey]) -> str:
+def which_type(statement: StatementData, choices: tuple[StatementKey, StatementKey]) -> str:
     """Return whichever of the choices of keys is in the statement.
 
     Note: All policy statements must have exactly one of these keys, so this raises an error if

@@ -93,7 +93,7 @@ def test_write_policy_leaves_expected_results(tmp_path):
 
 
 def test_fetch_retrieves_policy(mocker):
-    """fetch makes boto3 calls to retrieve the document, then caches it."""
+    """Make boto3 calls to retrieve the document, then cache it."""
 
     mock_cf = mocker.patch("wonk.policy.make_cache_file")
     mock_cf.return_value.read_text.side_effect = FileNotFoundError
