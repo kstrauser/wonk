@@ -2,3 +2,4 @@
 .coverage
 dist/
 __pycache__
+mise.local.toml

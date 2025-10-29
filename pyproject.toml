@@ -1,13 +1,12 @@
 [project]
 name = "wonk"
-version = "0.8.1"
+version = "0.8.2"
 description = "Wonk is a tool for combining a set of AWS policy files into smaller compiled policy sets."
-license = "Apache-2.0"
-authors = [{ name = "Kirk Strauser", email = "kirk@strauser.com" }]
 readme = "README.rst"
-homepage = "https://github.com/kstrauser/wonk"
-repository = "https://github.com/kstrauser/wonk.git"
+authors = [{ name = "Kirk Strauser", email = "kirk@strauser.com" }]
 requires-python = ">=3.9"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: System Administrators",
@@ -28,6 +27,11 @@ dependencies = [
   "toposort>=1.6",
   "xdg>=5.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/kstrauser/wonk"
+Repository = "https://github.com/kstrauser/wonk.git"
+Issues = "https://github.com/kstrauser/wonk/issues"
 
 [dependency-groups]
 dev = [
