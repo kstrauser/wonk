@@ -10,7 +10,7 @@ from wonk import aws, exceptions, optimizer
 from wonk.constants import MAX_MANAGED_POLICY_SIZE
 from wonk.models import Policy, Statement, canonicalize_resources, smallest_json, to_set
 
-POLICY_CACHE_DIR = xdg_cache_home() / "com.amino.wonk" / "policies"
+POLICY_CACHE_DIR = xdg_cache_home() / "net.honeypot.wonk" / "policies"
 
 
 def minify(policies: list[Policy]) -> list[Statement]:

@@ -249,6 +249,9 @@ The Policy Wonk is copyright 2021-2025 Kirk Strauser and Amino, Inc. and distrib
 
 History
 =======
+**0.8.1**
+  2025-10-29: New GitHub org, same author! This primarily updates the maintainer information to reflect the original author after the old repo was archived. Updated the name of the cache dir to reflect current maintainership.
+
 **0.8.0**
   2025-05-12: No code changes, just dependency updates and other cleanups. Now requires Python 3.9+, the oldest supported version. Migrated from poetry=>uv, black/flake/pylint=>ruff. Fixed minor typing deprecations.
 

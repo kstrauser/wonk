@@ -1,12 +1,12 @@
 [project]
 name = "wonk"
-version = "0.8.0"
+version = "0.8.1"
 description = "Wonk is a tool for combining a set of AWS policy files into smaller compiled policy sets."
 license = "Apache-2.0"
 authors = [{ name = "Kirk Strauser", email = "kirk@strauser.com" }]
 readme = "README.rst"
-homepage = "https://github.com/aminohealth/wonk"
-repository = "https://github.com/aminohealth/wonk.git"
+homepage = "https://github.com/kstrauser/wonk"
+repository = "https://github.com/kstrauser/wonk.git"
 requires-python = ">=3.9"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
